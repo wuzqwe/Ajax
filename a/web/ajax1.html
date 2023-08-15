@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试：ajax跨域访问会不会有问题</title>
+    <script type="text/javascript">
+        //使用ES6新特性 箭头函数、
+        /*默认情况下，发送ajax跨域请求的时候会出现以下错误
+        * Access to XMLHttpRequest at 'http://localhost:8081/b/hello' from origin 'http://localhost:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+        * 出现这个错误的根本原因：跨域访问的时候，不允许共享同一个XMLHttpRequest对象。因为共享同一个XMLHttpRequest对象是不安全的
+        * 重点提示：CORS策略阻止（这个ajax跨域请求被同源阻止）
+        * 什么是同源策略
+        * 同源策略是浏览器的一种安全策略
+        * 协议一致，域名一致，端口号一致，三个要素都一致，才是同源，其它一律都是不同源
+        * 同源：XMLHttpRequest对象可以共享
+        * 不同源：XMLHTTPRequest对象不共享
+        * */
+        window.onload=()=>{
+            document.getElementById("btn").onclick=function (){
+                let xhr=new XMLHttpRequest()
+                xhr.onreadystatechange=()=>{
+                    if (xhr.readyState==4){
+                        if (xhr.status>=200&&xhr.status<300){
+                            document.getElementById("mydiv").innerHTML=xhr.responseText
+                            console.log(xhr.responseText)
+                        }
+                    }
+                }
+                xhr.open("GET","http://localhost:8081/b/hello",true);
+                xhr.send()
+            }
+        }
+    </script>
+</head>
+<body>
+<button id="btn">发送ajax跨域请求</button>
+<div id="mydiv"></div>
+</body>
+</html>

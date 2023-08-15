@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json</title>
+    <script type="text/javascript">
+        var user={
+            "username":"zhangsan",
+            "password":"123456"
+        }
+        //是JSON对象才能这样访问
+        // alert(user.username+","+user.password)
+
+        //从服务器端返回来的不是一个JSON对象，是一个JSON格式的字符串
+       var jsonStr = "{\"username\" : \"zhangsan\", \"password\" : \"1233344\"}"
+
+        //有两种方式：
+        //第一种方式：使用eval函数（这个以前在javascript语言中讲过）
+        //第二种方式：使用JavaScript语言中的内置对象JSON的一个方法parse
+        var jsonobj=JSON.parse(jsonStr)
+        alert(jsonobj.username+","+jsonobj.password)
+    </script>
+</head>
+<body>
+
+</body>
+</html>

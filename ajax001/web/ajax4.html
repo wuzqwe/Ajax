@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发送Ajax post请求</title>
+</head>
+<body>
+<script type="text/javascript">
+window.onload=function (){
+    document.getElementById("btn").onclick=function (){
+        var xhr=new XMLHttpRequest()
+        xhr.onreadystatechange=function (){
+            if (this.readyState==4){
+                if (this.status) {
+                document.getElementById("mydiv").innerHTML=this.responseText
+                }else {
+                    alert(this.status)
+                }
+            }
+        }
+        var username = document.getElementById("username").value;
+        var password=document.getElementById("password").value;
+        xhr.open("POST","/ajax/ajaxrequest4",true)
+        //怎么模拟AJAX提交form表单，设置请求头的内容类型(这行代码非常关键，这是模拟form表单提交的关键代码)
+        //设置请求头必须在open之后
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+        xhr.send("username="+username+"&password="+password+"")
+    }
+}
+</script>
+用户名<input type="text" id="username"><br>
+密码<input type="text" id="password"><br>
+<button id="btn">发送AJAX POST请求</button>
+
+<div id="mydiv"></div>
+</body>
+</html>

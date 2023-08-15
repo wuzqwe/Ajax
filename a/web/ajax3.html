@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery的jsonp封装解决ajax跨域问题</title>
+    <script type="text/javascript" src="/a/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        //这个函数不需要你写，jQuery可以自动帮你生成
+        //function jQuery360033938461149719745_1673258971451&_=1673258971452(jsom){//系统自动生成这个函数的默认情况，会调用success的回调函数
+        // }
+        //http://localhost:8081/b/jsonp3?callback=jQuery360033938461149719745_1673258971451&_=1673258971452
+     /*   function sayHello(data){
+            $("#mydiv").html("欢迎你"+data.username)
+        }*/
+        $(function (){
+            $("#btn").click(function (){
+                $.ajax({
+                    type:"GET",
+                    url:"http://localhost:8081/b/jsonp3",
+                    dataType:"jsonp",//指定类型是jsonp形式（关键人物）
+                    success:function (data){
+                        $("#mydiv").html("欢迎你"+data.username)
+                    },
+                    // jsonp:"fun",//不采用默认的参数名callback，用这个属性来指定具体的参数名
+              /*      jsonpCallback:function (data){
+                        $("#mydiv").html("欢迎你"+data.username)
+                    }*/
+                    // jsonpCallback:"sayHello"//指定回调函数名
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<button id="btn">JQuery封装的jsonp库</button>
+<div id="mydiv"></div>
+</body>
+</html>

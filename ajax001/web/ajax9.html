@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>将Ajax代码进行封装，封装到jQuery库当中</title>
+    <script type="text/javascript" src="js/jQuery-1.0.0.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $("#btn").click(function (){
+                var username = $("#username").val();
+                $.ajax({
+                    type:"POST",
+                    url:"/ajax/ajaxrequest9",
+                    data:"username="+username,
+                    async:true,
+                    //程序响应回来之后，对于客户端来说拿到响应数据，然后解析这个数据，展示到页面上
+                    success:function (json){
+                        $("#mydiv").html(json.username)
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<button id="btn">发送ajax post请求 封装ajax库</button><br>
+用户名：<input type="text" id="username"><br>
+<div id="mydiv"></div>
+</body>
+</html>

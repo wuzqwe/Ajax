@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发生ajax get请求</title>
+</head>
+<body>
+<script type="text/javascript">
+    window.onload=function (){
+        document.getElementById("btn").onclick=function (){
+            //创建核心对象
+            var xhr = new XMLHttpRequest();
+            // console.log(xhr)
+            // console.log(this)
+            //注册回调函数
+            xhr.onreadystatechange=function (){
+                // console.log(this)
+                if (this.readyState==4) {
+                    if (this.status==200) {
+                        document.getElementById("myspan").innerHTML=this.responseText
+                    }else {
+                        alert(this.status)
+                    }
+                }
+            }
+            //打开通道
+            xhr.open("GET","/ajax/ajaxrequest2",true)
+            //发送请求
+            xhr.send()
+        }
+    }
+</script>
+<button id="btn">发生Ajax Get请求</button>
+
+<span id="myspan"></span>
+</body>
+</html>

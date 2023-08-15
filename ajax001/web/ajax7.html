@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手动封装JS库jQuery</title>
+    <script type="text/javascript">
+        //封装一个函数，通过这个函数可以获取到HTML页面中的结点，这个函数我给它去了个名字，叫做jQuery
+        //要封装的代码是：根据id来获取元素。document.getElementById("btn")
+        //设计思路来自于CSS语法。#id可以获取到元素
+        function jQuery(selector){
+            if (typeof selector=="string"){
+                if (selector.charAt(0)=="#"){
+                     domObj = document.getElementById(selector.substring(1));
+                    return  new jQuery()
+                }
+            }
+
+            //页面加载完毕之后，注册回调函数’
+            if(typeof selector=="function"){
+                window.onload=selector
+            }
+
+            //定义一个html()函数，代替：domObj.innerHTML=""
+            this.html=function (htmlStr){
+                domObj.innerHTML=htmlStr
+            }
+            //定义一个click()函数,代替：domObj.onclick=function(){}
+            this.click=function (fun){
+                domObj.onclick=fun
+            }
+
+            this.val=function (v){
+                if (v == undefined) {
+                    return domObj.value
+                }else {
+                    domObj.value=v
+                }
+
+            }
+
+
+        }
+        $=jQuery
+        /*window.onload=function (){
+            $("#btn").onclick=function (){
+                    $("#div1").innerHTML="用不到是否"
+            }
+        }*/
+        $(function (){
+        /*    $("#btn").onclick=function (){
+                // $("#div1").innerHTML="用不到是否"
+                $("#div1").html("用户用不到")
+            }*/
+            $("#btn").click(function () {
+                $("#div1").html("用户用不到")
+            })
+        })
+
+    </script>
+</head>
+<body>
+<button id="btn">nasihd</button>
+
+<div id="div1"></div>
+</body>
+</html>

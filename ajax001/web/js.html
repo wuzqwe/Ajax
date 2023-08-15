@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回顾javasctipt中类的定义，对象的创建。属性的访问，方法的访问</title>
+    <script type="text/javascript">
+        function User(usercode,username){
+            //属性
+            this.usercode=usercode
+            this.username=username
+            //方法（实例方法，通过对象调用）
+            this.doSome=function (){
+                console.log(username+"doSome...")
+            }
+            //静态方法（直接用类名调用）
+            User.doOther=function (){
+                console.log("user doOther...")
+            }
+        }
+
+
+        //创建对象，访问对象的属性，访问对象的方法，访问静态方法
+        //User()直接调用
+        var user = new User("111","zhangsan");
+        alert(user.username+","+user.usercode)
+        user.doSome()
+        User.doOther()
+
+        //后期可以使用prototype想给某个类型扩展方法
+        User.prototype.getUsername=function (){
+            return this.username
+        }
+        user.getUsername()
+    </script>
+</head>
+<body>
+
+</body>
+</html>

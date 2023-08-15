@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax提交数据</title>
+</head>
+<body>
+<script>
+    window.onload=function (){
+        document.getElementById("btn").onclick=function (){
+            var xhr=new XMLHttpRequest()
+            xhr.onreadystatechange=function (){
+                if (this.readyState==4){
+                    if (this.status==200){
+                        document.getElementById("mydiv").innerHTML=this.responseText
+                    }else {
+                        alert(this.status)
+                    }
+                }
+            }
+            var usercode = document.getElementById("search-input").value;
+            var username = document.getElementById("search-input1").value;
+            xhr.open("GET","/ajax/ajax3request?usercode="+usercode+"&username="+username+"",true)
+            xhr.send()
+        }
+    }
+</script>
+usercode<input type="text" id="search-input"><br>
+username<input type="text"  id="search-input1"><br>
+<button id="btn">提交数据</button>
+
+<div id="mydiv"></div>
+</body>
+</html>
